@@ -5,3 +5,5 @@ const TextStyle kTitleTextStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.bold,
 );
+
+const kRupeeSymbol = '\u{20B9}';
