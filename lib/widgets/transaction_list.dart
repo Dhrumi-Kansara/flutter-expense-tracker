@@ -24,60 +24,47 @@ class TransactionList extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
-                Container(width: 100, child: Image.asset('assets/images/waiting.png', fit: BoxFit.cover,)),
+                Container(
+                    width: 100,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    )),
               ],
             )
           : Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
+              child: ListView.builder(
+                shrinkWrap: true,
                 itemBuilder: (ctx, index) {
                   return Card(
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 10,
-                          ),
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              // color: Colors.purple,
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 2,
-                            ),
-                          ),
-                          child: Text(
-                            '$kRupeeSymbol${transactions[index].amount.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.primary,
+                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                    child: ListTile(
+                      leading: CircleAvatar( 
+                        radius: 40,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: ClipOval(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: FittedBox(
+                              child: Text(
+                                  '$kRupeeSymbol${transactions[index].amount.toStringAsFixed(2)}'),
                             ),
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              transactions[index].title,
-                              style: kTitleTextStyle,
-                            ),
-                            Text(
-                              DateFormat.yMMMd().format(transactions[index].date),
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
+                      title: Text(
+                        transactions[index].title,
+                        style: kTitleTextStyle,
+                      ),
+                      subtitle: Text(
+                        DateFormat.yMMMd().format(transactions[index].date),
+                      ),
                     ),
                   );
                 },
                 itemCount: transactions.length,
               ),
-          ),
+            ),
     );
   }
 }

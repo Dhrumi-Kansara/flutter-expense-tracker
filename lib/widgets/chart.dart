@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
-  
-  double totalSum=0;
+
+  double totalSum = 0;
 
   Chart({required this.recentTransactions});
 
@@ -19,23 +19,25 @@ class Chart extends StatelessWidget {
       double amountPerDay = 0;
 
       for (int i = 0; i < recentTransactions.length; i++) {
-        // recentTransactions[i].date==
         if (recentTransactions[i].date.day == weekDay.day &&
             recentTransactions[i].date.month == weekDay.month &&
             recentTransactions[i].date.year == weekDay.year) {
+
           amountPerDay = amountPerDay + recentTransactions[i].amount;
 
-          totalSum=totalSum+amountPerDay;
+          totalSum = totalSum + recentTransactions[i].amount;
         }
       }
 
       return chartData(
-          weekDay: DateFormat.E().format(weekDay).substring(0, 1), amountPerDay: amountPerDay);
-    });
+          weekDay: DateFormat.E().format(weekDay).substring(0, 1),
+          amountPerDay: amountPerDay);
+    }).reversed.toList();
   }
 
-  double getSpendingPctOfTotal(double amount, double totalSum) {
-    return amount/totalSum;
+  double getSpendingPctOfTotal(
+      {required double amount, required double totalSum}) {
+    return amount / totalSum;
   }
 
   @override
@@ -44,11 +46,18 @@ class Chart extends StatelessWidget {
       elevation: 5,
       margin: EdgeInsets.all(20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: groupedTransactionValues.map((chartData) {
-          return ChartBar(
-              label: chartData.weekDay,
-              spendingAmount: chartData.amountPerDay,
-              spendingPctOfTotal: totalSum == 0 ? 0 : getSpendingPctOfTotal(chartData.amountPerDay, totalSum));
+          return Flexible(
+            fit: FlexFit.tight,
+            child: ChartBar(
+                label: chartData.weekDay,
+                spendingAmount: chartData.amountPerDay,
+                spendingPctOfTotal: totalSum == 0
+                    ? 0
+                    : getSpendingPctOfTotal(
+                        amount: chartData.amountPerDay, totalSum: totalSum)),
+          );
         }).toList(),
       ),
     );
