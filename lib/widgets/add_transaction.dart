@@ -20,10 +20,10 @@ class _AddTransactionState extends State<AddTransaction> {
     String amountStr = widget.amountController.text;
     String title = widget.titleController.text;
     if (!title.isEmpty && double.tryParse(amountStr) != false) {
-      double amount = double.parse(amountStr); 
+      double amount = double.parse(amountStr);
       if (amount >= 0) {
-        
-        widget.addNewTransaction(amount: amount, title: widget.titleController.text);
+        widget.addNewTransaction(
+            amount: amount, title: widget.titleController.text);
         widget.titleController.clear();
         widget.amountController.clear();
       }
@@ -50,10 +50,26 @@ class _AddTransactionState extends State<AddTransaction> {
               decoration: InputDecoration(labelText: 'Amount'),
               onSubmitted: (_) => onSubmit(),
             ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Text('No date chosen!'),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Choose Date',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
             TextButton(
               onPressed: onSubmit,
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.purple),
+                backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.primary),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
               ),
               child: Text('Add Transaction'),
             ),

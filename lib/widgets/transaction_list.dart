@@ -39,15 +39,20 @@ class TransactionList extends StatelessWidget {
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                     child: ListTile(
-                      leading: CircleAvatar( 
-                        radius: 40,
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        child: ClipOval(
-                          child: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: FittedBox(
-                              child: Text(
-                                  '$kRupeeSymbol${transactions[index].amount.toStringAsFixed(2)}'),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0), //or 15.0 
+
+                        child: Container(
+                          color: Theme.of(context).colorScheme.primary,
+                          alignment: Alignment.center,
+                          height: 70,
+                          width: 70,
+                          padding: EdgeInsets.all(6),
+                          child: Text(
+                            '$kRupeeSymbol${transactions[index].amount.toStringAsFixed(2)}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
                             ),
                           ),
                         ),

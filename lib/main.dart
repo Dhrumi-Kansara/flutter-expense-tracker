@@ -34,7 +34,9 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.w700,
           ),
-        ),
+          
+        ), 
+        
       ),
       home: MyHomePage(),
     );
